@@ -156,7 +156,7 @@ void gamemap::drawVictoria()
 {
     string line;
     char userInput = ' ';
-    ifstream myFile("premioG2.txt");
+    ifstream myFile("premio.txt"); //cambio//
     if(myFile.is_open())
     {
         //Se obtiene el mapa externo y se general el mapa de celdas
