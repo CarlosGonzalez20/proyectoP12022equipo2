@@ -43,3 +43,30 @@
 	<iostream>
 	<fstream>
 
+1648222278 source:c:\users\user\projects\proyectofinal\proyectop12022equipo2\preliminar\proyecto_juego\main.cpp
+	<iostream>
+	"player.h"
+	"mapcell.h"
+	"gamemap.h"
+
+1648222278 c:\users\user\projects\proyectofinal\proyectop12022equipo2\preliminar\proyecto_juego\include\player.h
+
+1648222278 c:\users\user\projects\proyectofinal\proyectop12022equipo2\preliminar\proyecto_juego\include\mapcell.h
+
+1648222278 c:\users\user\projects\proyectofinal\proyectop12022equipo2\preliminar\proyecto_juego\include\gamemap.h
+	"mapcell.h"
+
+1648222278 source:c:\users\user\projects\proyectofinal\proyectop12022equipo2\preliminar\proyecto_juego\src\gamemap.cpp
+	"gamemap.h"
+	<iostream>
+	<fstream>
+
+1648222278 source:c:\users\user\projects\proyectofinal\proyectop12022equipo2\preliminar\proyecto_juego\src\mapcell.cpp
+	"mapcell.h"
+	<iostream>
+
+1648222278 source:c:\users\user\projects\proyectofinal\proyectop12022equipo2\preliminar\proyecto_juego\src\player.cpp
+	"player.h"
+	<iostream>
+	<fstream>
+
