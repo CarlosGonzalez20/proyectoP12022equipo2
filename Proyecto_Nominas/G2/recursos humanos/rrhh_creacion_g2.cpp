@@ -339,7 +339,7 @@ private:
     float sueldo, incentivo, bono14, iva, sueldot;;
     void registrar(){
         system("cls");
-        fstream baseDatos;
+        fstream baseDatosImpuestos;
         cout << "\n\t\t\tEntrando al menu --REGISTRAR IMPUESTOS EMPLEADOS--\n" << endl;
         cout << "\n\t¿Quires salir al --MENU IMPUESTOS EMPLEADOS--? [ si / no ] : "; cin >> desicion;
         if (desicion=="si"){
@@ -360,9 +360,9 @@ private:
             cout << "\t\tIngrese cantidad de Bono Incentivo:"; cin>>incentivo;
             cout <<"\t\tIngrese cantidad de Bono 14:"; cin>>bono14;
             cout << "\n\t--Registro completado--\n" << endl;
-            baseDatos.open("empleadosImpuestos.dat", ios::app | ios::out | ios::binary);
-            baseDatos <<std::left<<std::setw(15)<< documentoIdentificacion <<std::left<<std::setw(15)<< nombre <<std::left<<std::setw(15)<< edad <<std::left<<std::setw(15)<< correo <<std::left<<std::setw(15)<< telefono <<std::left<<std::setw(15)<< direccion <<std::left<<std::setw(15)<< estudios << std::left<<std::setw(15)<< puesto << std::left<<std::setw(15)<< sueldo <<std::left<<std::setw(15)<< nit <<std::left<<std::setw(15)<< Cbancaria<<std::left<<std::setw(15)<<incentivo<<std::left<<std::setw(15)<<bono14<<"\n";
-            baseDatos.close();
+            baseDatosImpuestos.open("empleadosImpuestos.dat", ios::app | ios::out | ios::binary);
+            baseDatosImpuestos <<std::left<<std::setw(15)<< documentoIdentificacion <<std::left<<std::setw(15)<< nombre <<std::left<<std::setw(15)<< edad <<std::left<<std::setw(15)<< correo <<std::left<<std::setw(15)<< telefono <<std::left<<std::setw(15)<< direccion <<std::left<<std::setw(15)<< estudios << std::left<<std::setw(15)<< puesto << std::left<<std::setw(15)<< sueldo <<std::left<<std::setw(15)<< nit <<std::left<<std::setw(15)<< Cbancaria<<std::left<<std::setw(15)<<incentivo<<std::left<<std::setw(15)<<bono14<<"\n";
+            baseDatosImpuestos.close();
             cout << "\n\n\t\tPresione s para salir "; cin >>desicion;
                 if (desicion=="s"){
                     cout <<"\t\t\nRegresando al --MENU IMPUESTOS--";
@@ -372,12 +372,12 @@ private:
     }
     void modificar(){
         system("cls");
-        fstream baseDatos, modBaseDatos;
+        fstream baseDatosImpuestos, modBaseDatosImpuestos;
         cout << "\n\t\t\tEntrando al menu --MODIFICAR IMPUESTOS--" << endl;
-            baseDatos.open("empleadosImpuestos.dat",ios::in|ios::binary);
-            if(!baseDatos){
+            baseDatosImpuestos.open("empleadosImpuestos.dat",ios::in|ios::binary);
+            if(!baseDatosImpuestos){
                 cout << "\n\t\tNo se encontro el archivo" << endl;
-                baseDatos.close();
+                baseDatosImpuestos.close();
                 cout << "\n\t\tPresione s para salir "; cin >>desicion;
                 if (desicion=="s"){
                     cout <<"\t\t\t\nRegresando al --MENU IMPUESTOS--";
@@ -386,11 +386,11 @@ private:
             }
             else {
                 cout << "\n\t\t\tIngrese el numero de Documento de Identificacion de la persona que busca: "; cin >> busquedaDatos;
-                modBaseDatos.open("temporalImpuestos.dat",ios::app|ios::out|ios::binary);
-                baseDatos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria;
-                while (!baseDatos.eof()){
+                modBaseDatosImpuestos.open("temporalImpuestos.dat",ios::app|ios::out|ios::binary);
+                baseDatosImpuestos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria;
+                while (!baseDatosImpuestos.eof()){
                     if (busquedaDatos!=documentoIdentificacion){
-                        modBaseDatos <<std::left<<std::setw(15)<< documentoIdentificacion <<std::left<<std::setw(15)<< nombre <<std::left<<std::setw(15)<< edad <<std::left<<std::setw(15)<< correo <<std::left<<std::setw(15)<< telefono << std::left<<std::setw(15)<< direccion << std::left<<std::setw(15)<< estudios << std::left<<std::setw(15)<< puesto << std::left<<std::setw(15)<< sueldo <<std::left<<std::setw(15)<<nit <<std::left<<std::setw(15)<< Cbancaria <<std::left<<std::setw(15)<<incentivo<<std::left<<std::setw(15)<<bono14<<"\n";
+                        modBaseDatosImpuestos <<std::left<<std::setw(15)<< documentoIdentificacion <<std::left<<std::setw(15)<< nombre <<std::left<<std::setw(15)<< edad <<std::left<<std::setw(15)<< correo <<std::left<<std::setw(15)<< telefono << std::left<<std::setw(15)<< direccion << std::left<<std::setw(15)<< estudios << std::left<<std::setw(15)<< puesto << std::left<<std::setw(15)<< sueldo <<std::left<<std::setw(15)<<nit <<std::left<<std::setw(15)<< Cbancaria <<std::left<<std::setw(15)<<incentivo<<std::left<<std::setw(15)<<bono14<<"\n";
                     }
                     else {
                         cout << "\n\t\tIngrese el numero de documento de identificacion de la persona: "; cin >> documentoIdentificacion;
@@ -406,12 +406,12 @@ private:
                         cout << "\t\tIngrese el numero de cuenta Bancaria"; cin>>Cbancaria;
                         cout << "\t\tIngrese cantidad de Bono Incentivo:"; cin>>incentivo;
                         cout <<"\t\tIngrese cantidad de Bono 14:"; cin>>bono14;
-                        modBaseDatos <<std::left<<std::setw(15)<< documentoIdentificacion <<std::left<<std::setw(15)<< nombre <<std::left<<std::setw(15)<< edad <<std::left<<std::setw(15)<< correo <<std::left<<std::setw(15)<< telefono << std::left<<std::setw(15)<< direccion << std::left<<std::setw(15)<< estudios << std::left<<std::setw(15)<< puesto << std::left<<std::setw(15)<< sueldo <<std::left<<std::setw(15)<<nit <<"\n";
+                        modBaseDatosImpuestos <<std::left<<std::setw(15)<< documentoIdentificacion <<std::left<<std::setw(15)<< nombre <<std::left<<std::setw(15)<< edad <<std::left<<std::setw(15)<< correo <<std::left<<std::setw(15)<< telefono << std::left<<std::setw(15)<< direccion << std::left<<std::setw(15)<< estudios << std::left<<std::setw(15)<< puesto << std::left<<std::setw(15)<< sueldo <<std::left<<std::setw(15)<<nit <<"\n";
                     }
-                    baseDatos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria>>incentivo>>bono14;
+                    baseDatosImpuestos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria>>incentivo>>bono14;
                 }
-                modBaseDatos.close();
-                baseDatos.close();
+                modBaseDatosImpuestos.close();
+                baseDatosImpuestos.close();
                 remove("empleadosImpuestos.dat");
                 rename("temporalIMpuestos.dat","empleadosImpuestos.dat");
                 cout << "\n\n\t\tPresione s para salir "; cin >>desicion;
@@ -424,12 +424,12 @@ private:
     void eliminar(){
         system("cls");
         int datos=0;
-        fstream baseDatos, modBaseDatos;
+        fstream baseDatosImpuestos, modBaseDatosImpuestos;
         cout << "\n\t\t\tEntrando al menu --ELIMINAR IMPUESTOS--" << endl;
-            baseDatos.open("empleadosImpuestos.dat",ios::in|ios::binary);
-            if(!baseDatos){
+            baseDatosImpuestos.open("empleadosImpuestos.dat",ios::in|ios::binary);
+            if(!baseDatosImpuestos){
                 cout << "\n\t\tNo se encontro el archivo" << endl;
-                baseDatos.close();
+                baseDatosImpuestos.close();
                 cout << "\n\t\tPresione s para salir "; cin >>desicion;
                 if (desicion=="s"){
                     cout <<"\t\t\nRegresando al --MENU MANTENIMIENTO--";
@@ -438,20 +438,20 @@ private:
             }
             else {
                 cout << "\n\t\tIngrese el numero de Documento de Identificacion de la persona que busca: "; cin >> busquedaDatos;
-                modBaseDatos.open("temporalImpuestos.dat",ios::app|ios::out|ios::binary);
-                baseDatos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria;
-                while (!baseDatos.eof()){
+                modBaseDatosImpuestos.open("temporalImpuestos.dat",ios::app|ios::out|ios::binary);
+                baseDatosImpuestos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria;
+                while (!baseDatosImpuestos.eof()){
                     if (busquedaDatos!=documentoIdentificacion){
                             //esto me esta dando un error y no sé porqué...
                             //no se puede eliminar un registro guardado
                             //terminar despues
-                        modBaseDatos <<std::left<<std::setw(15)<< documentoIdentificacion <<std::left<<std::setw(15)<< nombre <<std::left<<std::setw(15)<< edad <<std::left<<std::setw(15)<< correo <<std::left<<std::setw(15)<< telefono << std::left<<std::setw(15)<< direccion << std::left<<std::setw(15)<< estudios << std::left<<std::setw(15)<< puesto << std::left<<std::setw(15)<< sueldo <<std::left<<std::setw(15)<<nit <<std::left<<std::setw(15)<< Cbancaria<<std::left<<std::setw(15)<<incentivo<<std::left<<std::setw(15)<<bono14<<"\n";
+                        modBaseDatosImpuestos <<std::left<<std::setw(15)<< documentoIdentificacion <<std::left<<std::setw(15)<< nombre <<std::left<<std::setw(15)<< edad <<std::left<<std::setw(15)<< correo <<std::left<<std::setw(15)<< telefono << std::left<<std::setw(15)<< direccion << std::left<<std::setw(15)<< estudios << std::left<<std::setw(15)<< puesto << std::left<<std::setw(15)<< sueldo <<std::left<<std::setw(15)<<nit <<std::left<<std::setw(15)<< Cbancaria<<std::left<<std::setw(15)<<incentivo<<std::left<<std::setw(15)<<bono14<<"\n";
                     }
                     else {
                         datos++;
                         cout << "\n\t\tLa informacion se a borrado con exito...";
                     }
-                    baseDatos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria>>incentivo>>bono14;
+                    baseDatosImpuestos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria>>incentivo>>bono14;
                 }
                 if (datos==0){
                     cout << "\n\t\t\tNo se encontraron coincidencias, Revise el numero del Documento de Identificacion e intentelo de nuevo...";
@@ -461,8 +461,8 @@ private:
                     return menuImpuestos();
                     }
                 }
-                modBaseDatos.close();
-                baseDatos.close();
+                modBaseDatosImpuestos.close();
+                baseDatosImpuestos.close();
                 remove("empleadosImpuestos.dat");
                 rename("temporalImpuestos.dat","empleadosImpuestos.dat");
                 cout << "\n\n\t\tPresione s para salir "; cin >>desicion;
@@ -476,13 +476,13 @@ private:
 
     void mostrarDatos(){
         system("cls");
-        fstream baseDatos;
+        fstream baseDatosImpuestos;
         cout << "\n\t\t\tEntrando al menu --MOSTRAR DATOS--";
         cout << "\n\n\t\t¿Quiere buscar a una persona en especifico? [ si / no ] : "; cin>>desicion;
         if (desicion=="si"){
             int datos=0;
-            baseDatos.open("empleadosImpuestos.dat",ios::in|ios::binary);
-            if(!baseDatos)
+            baseDatosImpuestos.open("empleadosImpuestos.dat",ios::in|ios::binary);
+            if(!baseDatosImpuestos)
             {
                 cout<<"\n\t\tError";
                 cout<<"\n\t\t\tNo se encontro el archivo, asegurese de que el archivo este en la misma carpeta que el programa";
@@ -491,8 +491,8 @@ private:
             {
                 cout << "\n\t\t\tEntrando en el menu --BUSCAR--"<<endl;
                 cout << "\n\t\tIngrese el numero del Documento de Identificacion de la persona a buscar: "; cin >> busquedaDatos;
-                baseDatos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria>>incentivo>>bono14>>sueldot;
-                while(!baseDatos.eof()){
+                baseDatosImpuestos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria>>incentivo>>bono14>>sueldot;
+                while(!baseDatosImpuestos.eof()){
                     if(busquedaDatos==documentoIdentificacion){
                         cout<<"\n\t\tDocumento de Identificacion: "<< documentoIdentificacion;
                         cout<<"\n\t\tNombre: " << nombre;
@@ -509,7 +509,7 @@ private:
                         cout<<"\n\t\tSueldo total:"<<sueldot;
                          datos++;
                     }
-                    baseDatos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria>>incentivo>>bono14>>sueldot;
+                    baseDatosImpuestos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria>>incentivo>>bono14>>sueldot;
                 }
                 if(datos==0)
                 {
@@ -520,17 +520,17 @@ private:
                     cout <<"\t\t\t\nRegresando al --MENU MOSTRAR DATOS IMPUESTOS--";
                     return mostrarDatos();
                 }
-                baseDatos.close();
+                baseDatosImpuestos.close();
             }
         }
         else {
-            fstream baseDatos;
+            fstream baseDatosImpuestos;
             int total=0;
             cout<<"\n\t\t\tEntrando al --MENU MOSTRAR DATOS IMPUESTOS"<<endl;
-            baseDatos.open("empleadosImpuestos.dat",ios::in|ios::binary);
-            if(!baseDatos){
+            baseDatosImpuestos.open("empleadosImpuestos.dat",ios::in|ios::binary);
+            if(!baseDatosImpuestos){
                 cout<<"\n\t\t\tError\n\t\t\tNo se encontro el archivo, asegurese de que el archivo se encuentre en la misma carpeta del programa";
-                baseDatos.close();
+                baseDatosImpuestos.close();
                 cout << "\n\t\tPresione s para salir "; cin >>desicion;
                 if (desicion=="s"){
                     cout <<"\t\t\t\nRegresando al --MENU MANTENIMIENTO--";
@@ -539,8 +539,8 @@ private:
             }
             else
             {
-                baseDatos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria>>incentivo>>bono14>>sueldot;
-                while(!baseDatos.eof())
+                baseDatosImpuestos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria>>incentivo>>bono14>>sueldot;
+                while(!baseDatosImpuestos.eof())
                 {
                     total++;
                     cout<<"\n\n\t\tDocumento de Identificacion: "<< documentoIdentificacion;
@@ -557,7 +557,7 @@ private:
                     sueldot=(incentivo+bono14)-iva;
                         cout<<"\n\t\tSueldo total:"<<sueldot;
 
-                    baseDatos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria>>incentivo>>bono14>>sueldot;
+                    baseDatosImpuestos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria>>incentivo>>bono14>>sueldot;
                 }
                 if(total==0){
                     cout<<"\n\t\t\tEl archivo se encuentra vacio...";
@@ -568,7 +568,7 @@ private:
                     return menuImpuestos();
                 }
             }
-            baseDatos.close();
+            baseDatosImpuestos.close();
         }
     }
     // Impuestos William Mayen ---------------------------------------------------------------------------------------------------//
