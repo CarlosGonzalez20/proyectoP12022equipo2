@@ -8,8 +8,11 @@ using namespace std;
 
 class empresa{
 public:
-
     void registrar(){
+            std::fstream bitacora;
+            bitacora.open("bitacora.dat",ios::app|ios::in|ios::out|ios::binary);
+            bitacora<<std::left<<std::setw(15)<<"menu registrar";
+            bitacora.close();
         system("cls");
         fstream baseDatos;
         cout << "\n\t\t\tEntrando al menu --REGISTRAR EMPLEADOS--\n" << endl;
@@ -39,6 +42,10 @@ public:
         }
     }
     void modificar(){
+            std::fstream bitacora;
+            bitacora.open("bitacora.dat",ios::app|ios::in|ios::out|ios::binary);
+            bitacora<<std::left<<std::setw(15)<<"menu modificar";
+            bitacora.close();
         system("cls");
         fstream baseDatos, modBaseDatos;
         cout << "\n\t\t\tEntrando al menu --MODIFICAR--" << endl;
@@ -86,6 +93,10 @@ public:
             }
     }
     void eliminar(){
+            std::fstream bitacora;
+            bitacora.open("bitacora.dat",ios::app|ios::in|ios::out|ios::binary);
+            bitacora<<std::left<<std::setw(15)<<"menu eliminar";
+            bitacora.close();
         system("cls");
         int datos=0;
         fstream baseDatos, modBaseDatos;
@@ -137,6 +148,10 @@ public:
             }
     }
     void mostrarDatos(){
+            std::fstream bitacora;
+            bitacora.open("bitacora.dat",ios::app|ios::in|ios::out|ios::binary);
+            bitacora<<std::left<<std::setw(15)<<"menu mostrar";
+            bitacora.close();
         system("cls");
         fstream baseDatos;
         cout << "\n\t\t\tEntrando al menu --MOSTRAR DATOS--";
@@ -227,32 +242,45 @@ public:
     void menuPrincipal(){
         system ("cls");
         int menu;
-        cout << "\n\t\t\tBienvenido al programa de ==RECURSOS HUMANOS==";
-        cout << "\n\n\t\tElija el numero del menu al que quiera ingresar\n"<< endl << "\t\t[1] Mantenimiento\n" << "\t\t[2] Nomina\n" << "\t\t[3] Poliza\n" << "\t\t[4] Impuestos\n" << "\t\t[5] Departamentos\n" << "\t\t[6] Salir del programa\n";cout<<"\n\t\t";cin >> menu;
-        switch(menu){
-        case 1:
-            menuMantenimiento();
-            break;
-        case 2:
-            menuNomina();
-            break;
-        case 3:
-            menuPoliza();
-            break;
-        case 4:
-            menuImpuestos();
-            break;
-        case 5:
-            menuDepartamentos();
-            break;
-        case 6:
-            cout << "\n\t\t¿Quiere salir del programa? [ si / no ] : "; cin>>desicion;
-            if (desicion=="si"){
-                return exit (0);
-            }
-            else {
-                return menuPrincipal();
-            break;
+        fstream bienvenida;
+        string line;
+        bienvenida.open("bienvenidos.txt");
+        if(bienvenida.is_open()){
+        while( getline(bienvenida, line))
+        {
+            cout << line << endl;
+        }
+        bienvenida.close();
+        }
+        cout << "\n\t\tPresione i para ingresar al --PROGRAMA-- : ";cin>>desicion;
+        if (desicion=="i"){
+            cout << "\n\t\t\tBienvenido al programa de ==RECURSOS HUMANOS==";
+            cout << "\n\n\t\tElija el numero del menu al que quiera ingresar\n"<< endl << "\t\t[1] Mantenimiento\n" << "\t\t[2] Nomina\n" << "\t\t[3] Poliza\n" << "\t\t[4] Impuestos\n" << "\t\t[5] Departamentos\n" << "\t\t[6] Salir del programa\n";cout<<"\n\t\t";cin >> menu;
+            switch(menu){
+            case 1:
+                menuMantenimiento();
+                break;
+            case 2:
+                menuNomina();
+                break;
+            case 3:
+                menuPoliza();
+                break;
+            case 4:
+                menuImpuestos();
+                break;
+            case 5:
+                menuDepartamentos();
+                break;
+            case 6:
+                cout << "\n\t\t¿Quiere salir del programa? [ si / no ] : "; cin>>desicion;
+                if (desicion=="si"){
+                    return exit (0);
+                }
+                else {
+                    return menuPrincipal();
+                break;
+                }
             }
         }
     }
@@ -281,7 +309,28 @@ public:
             }
     }
     void menuNomina(){
-        cout<<"hola";
+        system("cls");
+        int menu;
+        cout << "\n\t\tBienvenido al --MENU NOMINA--" << endl;
+        cout << "\n\t\tElija el numero del menu al que quiere ingresar\n" << endl << "\t\t[1] Registrar\n" << "\t\t[2] Modificar\n" << "\t\t[3] Eliminar\n" << "\t\t[4] Mostrar Datos\n" << "\t\t[5] Salir al --MENU PRINCIPAL--\n";cout<<"\n\t\t"; cin >> menu;
+        switch (menu){
+        case 1:
+            registrar();
+            break;
+        case 2:
+            modificar();
+            break;
+        case 3:
+            eliminar();
+            break;
+        case 4:
+            mostrarDatos();
+            break;
+        case 5:
+            cout << "\tSaliendo al --MENU PRINCIPAL--" << endl;
+            return menuPrincipal();
+            break;
+            }
     }
     void menuPoliza(){
         cout<<"hola";
@@ -316,17 +365,264 @@ public:
     void menuDepartamentos(){
         cout<<"hola";
     }
+
 private:
-    string documentoIdentificacion, nombre, direccion, edad, correo, telefono, estudios, puesto, sueldo, desicion, busquedaDatos;;
+
+    string documentoIdentificacion, nombre, direccion, edad, correo, telefono, estudios, puesto, sueldo, desicion, busquedaDatos, bono;;
+    int nomi, sueldonet, sueldoh, horasextr, horastr;
+
 };
 
+
+
 class empleado : public empresa{
+
 private:
-    string documentoIdentificacion, nombre, direccion, edad, correo, telefono, estudios, puesto, sueldo, nit, Cbancaria, desicion, busquedaDatos;;
+
+     string documentoIdentificacion, nombre, direccion, edad, correo, telefono, estudios, puesto,  sueldo, nit, Cbancaria, desicion, busquedaDatos, bono;
+     int nomi, sueldonet, sueldoh, horasextr, horastr;
 };
 
 class nomina : public empresa{
-    //aqui deben copiar y pegar el void de registrar, modificar, eliminar, y mostrar... pero con cambios, sino estaran trabajando con mi clase de empleados
+    string documentoIdentificacion, nombre, direccion, edad, correo, telefono, estudios, puesto, desicion, busquedaDatos, bono;
+     int nomi, sueldonet, sueldoh, horasextr, horastr;
+
+     void registrar(){
+        system("cls");
+        fstream baseDatosNomina;
+        cout << "\n\t\t\tEntrando al menu --REGISTRAR EMPLEADOS--\n" << endl;
+        cout << "\n\t¿Quires salir al --MENU NOMINA-? [ si / no ] : "; cin >> desicion;
+        if (desicion=="si"){
+            return menuNomina();
+        }
+        else {
+            cout << "\n\t\tIngrese el numero de documento de identificacion de la persona: "; cin >> documentoIdentificacion;
+            cout << "\t\tIngrese el nombre de la persona a registrar: "; cin >> nombre;
+            cout << "\t\tIngrese la edad de la persona a registrar: "; cin >> edad;
+            cout << "\t\tIngrese el correo de la persona a registrar: "; cin >> correo;
+            cout << "\t\tIngrese el numero de telefono de la persona a registrar: "; cin >> telefono;
+            cout << "\t\tIngrese la direccion de la persona a registrar: "; cin >> direccion;
+            cout << "\t\tIngrese el nivel de estudios de la persona a registrar: "; cin >> estudios;
+            cout << "\t\tIngrese el puesto de la persona a registrar: "; cin>>puesto;
+            cout << "\t\tIngrese el sueldo que gana por hora a registrar "; cin>>sueldoh;
+            cout << "\t\tIngrese las horas trabajadas  a registrar "; cin>>horastr;
+            cout << "\t\tIngrese las horas extras de la persona a registrar(si no tiene horas extras ingrese 0 cero )"; cin>>horasextr;
+            cout << "\t\tSu bono incentivo ya se ha agregado a su salario neto de Q250.00 ";
+            cout << "\n\t--Registro completado--\n" << endl;
+            baseDatosNomina.open("Nomina.dat", ios::app | ios::out | ios::binary);
+            baseDatosNomina <<std::left<<std::setw(15)<< documentoIdentificacion <<std::left<<std::setw(15)<< nombre << std::left<<std::setw(15)<< edad <<std::left<<std::setw(15)<< correo <<std::left<<std::setw(15)<< telefono <<std::left<<std::setw(15)<< direccion <<std::left<<std::setw(15)<< estudios << std::left<<std::setw(15)<< puesto << std::left<<std::setw(15)<< sueldoh << std::left<<std::setw(15)<< horastr << std::left<<std::setw(15)<< horasextr << "\n";
+            baseDatosNomina.close();
+            cout << "\n\n\t\tPresione s para salir "; cin >>desicion;
+                if (desicion=="s"){
+                    cout <<"\t\t\nRegresando al --MENU NOMINA--";
+                    return menuNomina();
+                }
+        }
+    }
+    void modificar(){
+        system("cls");
+        fstream baseDatosNomina, modBaseDatosnomina;
+        cout << "\n\t\t\tEntrando al menu --MODIFICAR NOMINA--" << endl;
+            baseDatosNomina.open("Nomina.dat",ios::in|ios::binary);
+            if(!baseDatosNomina){
+                cout << "\n\t\tNo se encontro el archivo" << endl;
+                baseDatosNomina.close();
+                cout << "\n\t\tPresione s para salir "; cin >>desicion;
+                if (desicion=="s"){
+                    cout <<"\t\t\t\nRegresando al --MENU N0MINA--";
+                    return menuNomina();
+                }
+            }
+            else {
+                cout << "\n\t\t\tIngrese el numero de Documento de Identificacion de la persona que busca: "; cin >> busquedaDatos;
+                modBaseDatosnomina.open("temporal.dat",ios::app|ios::out|ios::binary);
+                baseDatosNomina>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldoh>>horastr>>horasextr;
+                while (!baseDatosNomina.eof()){
+                    if (busquedaDatos!=documentoIdentificacion){
+                        modBaseDatosnomina <<std::left<<std::setw(15)<< documentoIdentificacion <<std::left<<std::setw(15)<< nombre <<std::left<<std::setw(15)<< edad <<std::left<<std::setw(15)<< correo <<std::left<<std::setw(15)<< telefono << std::left<<std::setw(15)<< direccion << std::left<<std::setw(15)<< estudios << std::left<<std::setw(15)<< puesto << std::left<<std::setw(15)<< sueldoh << std::left<<std::setw(15)<< horastr <<std::left<<std::setw(15)<< horasextr << "\n";
+                    }
+                    else {
+                        cout << "\n\t\tIngrese el numero de documento de identificacion de la persona: "; cin >> documentoIdentificacion;
+                        cout << "\t\tIngrese el nombre de la persona a registrar: "; cin >> nombre;
+                        cout << "\t\tIngrese la edad de la persona a registrar: "; cin >> edad;
+                        cout << "\t\tIngrese el correo de la persona a registrar: "; cin >> correo;
+                        cout << "\t\tIngrese el numero de telefono de la persona a registrar: "; cin >> telefono;
+                        cout << "\t\tIngrese la direccion de la persona a registrar: "; cin >> direccion;
+                        cout << "\t\tIngrese el nivel de estudios de la persona a registrar: "; cin >> estudios;
+                        cout << "\t\tIngrese el puesto de la persona a registrar: "; cin>>puesto;
+                        cout << "\t\tIngrese el sueldo que gana por hora a registrar "; cin>>sueldoh;
+                        cout << "\t\tIngrese las horas trabajadas  a registrar "; cin>>horastr;
+                        cout << "\t\tIngrese las horas extras de la persona a registrar(si no tiene horas extras ingrese 0 cero )"; cin>>horasextr;
+                        cout << "\t\tSu bono incentivo ya se ha agregado a su salario neto de Q250.00 ";
+                        modBaseDatosnomina<<std::left<<std::setw(15)<< documentoIdentificacion <<std::left<<std::setw(15)<< nombre << std::left<<std::setw(15)<< edad <<std::left<<std::setw(15)<< correo <<std::left<<std::setw(15)<< telefono <<std::left<<std::setw(15)<< direccion <<std::left<<std::setw(15)<< estudios << std::left<<std::setw(15)<< puesto << std::left<<std::setw(15)<< sueldoh << std::left<<std::setw(15)<< horastr << std::left<<std::setw(15)<< horasextr << "\n";
+                    }
+                    baseDatosNomina>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldoh>>horastr>>horasextr;
+                }
+                modBaseDatosnomina.close();
+                baseDatosNomina.close();
+                remove("Nomina.dat");
+                rename("temporal.dat","Nomina.dat");
+                cout << "\n\n\t\tPresione s para salir "; cin >>desicion;
+                if (desicion=="s"){
+                    cout <<"\t\t\nRegresando al --MENU NOMINA--";
+                    return menuNomina();
+                }
+            }
+    }
+    void eliminar(){
+        system("cls");
+        int datos=0;
+        fstream baseDatosNomina, modBaseDatosnomina;
+        cout << "\n\t\t\tEntrando al menu --ELIMINAR--" << endl;
+            baseDatosNomina.open("Nomina.dat",ios::in|ios::binary);
+            if(!baseDatosNomina){
+                cout << "\n\t\tNo se encontro el archivo" << endl;
+                baseDatosNomina.close();
+                cout << "\n\t\tPresione s para salir "; cin >>desicion;
+                if (desicion=="s"){
+                    cout <<"\t\t\nRegresando al --MENU NOMINA--";
+                    return menuNomina();
+                }
+            }
+            else {
+                cout << "\n\t\tIngrese el numero de Documento de Identificacion de la persona que busca: "; cin >> busquedaDatos;
+                modBaseDatosnomina.open("temporal.dat",ios::app|ios::out|ios::binary);
+                baseDatosNomina>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldoh>>horastr>>horasextr;
+                while (!baseDatosNomina.eof()){
+                    if (busquedaDatos!=documentoIdentificacion){
+                            //esto me esta dando un error y no sé porqué...
+                            //no se puede eliminar un registro guardado
+                            //terminar despues
+                        modBaseDatosnomina <<std::left<<std::setw(15)<< documentoIdentificacion <<std::left<<std::setw(15)<< nombre <<std::left<<std::setw(15)<< edad <<std::left<<std::setw(15)<< correo <<std::left<<std::setw(15)<< telefono << std::left<<std::setw(15)<< direccion << std::left<<std::setw(15)<< estudios << std::left<<std::setw(15)<< puesto << std::left<<std::setw(15)<< sueldoh << std::left<<std::setw(15)<< horastr << std::left<<std::setw(15)<< horasextr << "\n";
+                    }
+                    else {
+                        datos++;
+                        cout << "\n\t\tLa informacion se a borrado con exito...";
+                    }
+                    baseDatosNomina>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldoh>>horastr>>horasextr;
+                }
+                if (datos==0){
+                    cout << "\n\t\t\tNo se encontraron coincidencias, Revise el numero del Documento de Identificacion e intentelo de nuevo...";
+                    cout << "\n\n\t\tPresione s para intentarlo de nuevo "; cin >>desicion;
+                if (desicion=="s"){
+                    cout <<"\t\t\t\nRegresando al --MENU NOMINA--";
+                    return menuNomina();
+                    }
+                }
+                modBaseDatosnomina.close();
+                baseDatosNomina.close();
+                remove("Nomina.dat");
+                rename("temporal.dat","Nomina.dat");
+                cout << "\n\n\t\tPresione s para salir "; cin >>desicion;
+                if (desicion=="s"){
+                    cout <<"\t\t\nRegresando al --MENU NOMINA--";
+                    return menuNomina();
+                }
+            }
+    }
+    void mostrarDatos(){
+        system("cls");
+        fstream baseDatosNomina;
+        cout << "\n\t\t\tEntrando al menu --MOSTRAR DATOS--";
+        cout << "\n\n\t\t¿Quiere buscar a una persona en especifico? [ si / no ] : "; cin>>desicion;
+        if (desicion=="si"){
+            int datos=0;
+            baseDatosNomina.open("Nomina.dat",ios::in|ios::binary);
+            if(!baseDatosNomina)
+            {
+                cout<<"\n\t\tError";
+                cout<<"\n\t\t\tNo se encontro el archivo, asegurese de que el archivo este en la misma carpeta que el programa";
+            }
+            else
+            {
+                cout << "\n\t\t\tEntrando en el menu --BUSCAR--"<<endl;
+                cout << "\n\t\tIngrese el numero del Documento de Identificacion de la persona a buscar: "; cin >> busquedaDatos;
+                baseDatosNomina>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldoh>>horastr>>horasextr;
+                while(!baseDatosNomina.eof()){
+
+                    if(busquedaDatos==documentoIdentificacion){
+                        cout<<"\n\t\tDocumento de Identificacion: "<< documentoIdentificacion;
+                        cout<<"\n\t\tNombre: " << nombre;
+                        cout<<"\n\t\tEdad: "<< edad;
+                        cout<<"\n\t\tCorreo Electronico: "<< correo;
+                        cout<<"\n\t\tTelefono: "<< telefono;
+                        cout<<"\n\t\tDireccion: "<< direccion;
+                        cout<<"\n\t\tNivel de estudios: "<< estudios;
+                        cout<<"\n\t\tPuesto o cargo: "<< puesto;
+                        cout<<"\n\t\tSueldo por hora: "<< sueldoh;
+                        cout<<"\n\t\tHoras trabajadas: "<< horastr;
+                        cout<<"\n\t\tHoras Extras trabajadas : "<< horasextr;
+                        cout<<"\n\t\tBono incentivo: Q250.00" ;
+
+                        datos++;
+                    }
+                    baseDatosNomina>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldoh>>horastr>>horasextr;
+                }
+                if(datos==0)
+                {
+                    cout<<"\n\t\t\tNo se encontro ninguna coincidencia, intentelo de nuevo";
+                }
+                cout << "\n\t\tPresione s para salir "; cin >>desicion;
+                if (desicion=="s"){
+                    cout <<"\t\t\t\nRegresando al --MENU MOSTRAR DATOS--";
+                    return mostrarDatos();
+                }
+                baseDatosNomina.close();
+            }
+        }
+        else {
+            fstream baseDatosNomina;
+            int total=0;
+            cout<<"\n\t\t\tEntrando al --MENU MOSTRAR DATOS"<<endl;
+            baseDatosNomina.open("Nomina.dat",ios::in|ios::binary);
+            if(!baseDatosNomina){
+                cout<<"\n\t\t\tError\n\t\t\tNo se encontro el archivo, asegurese de que el archivo se encuentre en la misma carpeta del programa";
+                baseDatosNomina.close();
+                cout << "\n\t\tPresione s para salir "; cin >>desicion;
+                if (desicion=="s"){
+                    cout <<"\t\t\t\nRegresando al --MENU NOMINA--";
+                    return menuNomina();
+                }
+            }
+            else
+            {
+                baseDatosNomina>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldoh>>horastr>>horasextr;
+                while(!baseDatosNomina.eof())
+                {
+                    total++;
+                        cout<<"\n\t\tDocumento de Identificacion: "<< documentoIdentificacion;
+                        cout<<"\n\t\tNombre: " << nombre;
+                        cout<<"\n\t\tEdad: "<< edad;
+                        cout<<"\n\t\tCorreo Electronico: "<< correo;
+                        cout<<"\n\t\tTelefono: "<< telefono;
+                        cout<<"\n\t\tDireccion: "<< direccion;
+                        cout<<"\n\t\tNivel de estudios: "<< estudios;
+                        cout<<"\n\t\tPuesto o cargo: "<< puesto;
+                        cout<<"\n\t\tSueldo por hora: "<< sueldoh;
+                        cout<<"\n\t\tHoras trabajadas: "<< horastr;
+                        cout<<"\n\t\tHoras Extras trabajadas : "<< horasextr;
+                        cout<<"\n\t\tBono incentivo: Q250.00" ;
+                        sueldonet=horastr+horasextr;
+                        nomi=sueldonet*sueldoh;
+                        bono=sueldonet+250;
+                        cout<<"\n\t\tSueldo neto (TOTAL): "<< nomi;
+                     baseDatosNomina>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldoh>>horastr>>horasextr>>sueldonet>>nomi;
+                }
+                if(total==0){
+                    cout<<"\n\t\t\tEl archivo se encuentra vacio...";
+                }
+                cout << "\n\n\t\tPresione s para salir "; cin >>desicion;
+                if (desicion=="s"){
+                    cout <<"\t\t\nRegresando al --MENU NOMINA--";
+                    return menuNomina();
+                }
+            }
+            baseDatosNomina.close();
+        }
+    }
+};
+private:
+    string documentoIdentificacion, nombre, direccion, edad, correo, telefono, estudios, puesto, sueldo, desicion, busquedaDatos;;
 };
 
 class poliza : public empresa{
@@ -579,29 +875,31 @@ class departamento : public empresa{
     //aqui deben copiar y pegar el void de registrar, modificar, eliminar, y mostrar... pero con cambios, sino estaran trabajando con mi clase de empleados
 };
 
+
  int main(){
     system ("cls");
     string usuario, contrasena, config1, config2;
-    fstream usuariosContrasenas;
-    usuariosContrasenas.open("seguridad.dat",ios::in|ios::binary);
-    //if(!usuariosContrasenas){
-      //  cout<<"\n\t\tError";
-        //cout<<"\n\t\tNo se encontro el archivo, asegurese de que el archivo este en la misma carpeta que el programa";
-    //}
-    //else{
-      //  cout << "\n\t\t\tBIENVENIDO AL PROGRAMA DE RECURSOS HUMANOS DEL GRUPO 2\n" << endl;
-        //cout << "\n\t\tIngrese su usuario: "; cin >> usuario;
-        //cout << "\n\t\tIngrese su contraseña: "; cin >> contrasena;
-        //usuariosContrasenas>>config1>>config2;
-        //while (!usuariosContrasenas.eof()){
-         //   if (usuario==config1 and contrasena ==config2){
+    fstream usuariosContrasenas, bitacora;
+    usuariosContrasenas.open("seguridad.dat",ios::app|ios::in|ios::binary);
+    if(!usuariosContrasenas){
+        cout<<"\n\t\tError";
+        cout<<"\n\t\tNo se encontro el archivo, asegurese de que el archivo este en la misma carpeta que el programa";
+    }
+    else{
+        cout << "\n\t\t\tBIENVENIDO AL PROGRAMA DE RECURSOS HUMANOS DEL GRUPO 2\n" << endl;
+        cout << "\n\t\tIngrese su usuario: "; cin >> usuario;
+        cout << "\n\t\tIngrese su contrasena: "; cin >> contrasena;
+        usuariosContrasenas>>config1>>config2;
+            if (usuario=="admin" && contrasena =="123"){
+                bitacora.open("bitacora.dat",ios::app|ios::in|ios::out|ios::binary);
+                bitacora<<std::left<<std::setw(15)<<usuario;
+                bitacora.close();
                 empleado prueba;
                 prueba.menuPrincipal();
-           // }
-           // else{
-             //   cout << "Permiso denegado\a";
-               // exit(0);
-            //}
-        //}
-    //}
+            }
+            else{
+                cout << "\n\t\t\tPermiso denegado\a";
+                exit(0);
+            }
+      }
 };
