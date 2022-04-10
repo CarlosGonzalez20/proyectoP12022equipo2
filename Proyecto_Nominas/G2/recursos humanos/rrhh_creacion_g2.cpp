@@ -286,7 +286,7 @@ public:
     void menuPoliza(){
         cout<<"hola";
     }
-    // Impuestos William Mayen ---------------------------------------------------------------------------------------------------//
+    // Impuestos William Mayen INICIO---------------------------------------------------------------------------------------------------//
     void menuImpuestos(){
         cout<<"hola";
         system("cls");
@@ -312,7 +312,7 @@ public:
             break;
             }
     }
-    // Impuestos William Mayen ---------------------------------------------------------------------------------------------------//
+    // Impuestos William Mayen FIN---------------------------------------------------------------------------------------------------//
     void menuDepartamentos(){
         cout<<"hola";
     }
@@ -332,7 +332,7 @@ class nomina : public empresa{
 class poliza : public empresa{
     //aqui deben copiar y pegar el void de registrar, modificar, eliminar, y mostrar... pero con cambios, sino estaran trabajando con mi clase de empleados
 };
-// Impuestos William Mayen ---------------------------------------------------------------------------------------------------//
+// Impuestos William Mayen INICIO---------------------------------------------------------------------------------------------------//
 class impuestos : public empresa{
 private:
     string documentoIdentificacion, nombre, direccion, edad, correo, telefono, estudios, puesto, nit, Cbancaria, desicion, busquedaDatos;;
@@ -360,7 +360,7 @@ private:
             cout << "\t\tIngrese cantidad de Bono Incentivo:"; cin>>incentivo;
             cout <<"\t\tIngrese cantidad de Bono 14:"; cin>>bono14;
             cout << "\n\t--Registro completado--\n" << endl;
-            baseDatosImpuestos.open("empleadosImpuestos.dat", ios::app | ios::out | ios::binary);
+            baseDatosImpuestos.open("empleados.dat", ios::app | ios::out | ios::binary);
             baseDatosImpuestos <<std::left<<std::setw(15)<< documentoIdentificacion <<std::left<<std::setw(15)<< nombre <<std::left<<std::setw(15)<< edad <<std::left<<std::setw(15)<< correo <<std::left<<std::setw(15)<< telefono <<std::left<<std::setw(15)<< direccion <<std::left<<std::setw(15)<< estudios << std::left<<std::setw(15)<< puesto << std::left<<std::setw(15)<< sueldo <<std::left<<std::setw(15)<< nit <<std::left<<std::setw(15)<< Cbancaria<<std::left<<std::setw(15)<<incentivo<<std::left<<std::setw(15)<<bono14<<"\n";
             baseDatosImpuestos.close();
             cout << "\n\n\t\tPresione s para salir "; cin >>desicion;
@@ -374,7 +374,7 @@ private:
         system("cls");
         fstream baseDatosImpuestos, modBaseDatosImpuestos;
         cout << "\n\t\t\tEntrando al menu --MODIFICAR IMPUESTOS--" << endl;
-            baseDatosImpuestos.open("empleadosImpuestos.dat",ios::in|ios::binary);
+            baseDatosImpuestos.open("empleados.dat",ios::in|ios::binary);
             if(!baseDatosImpuestos){
                 cout << "\n\t\tNo se encontro el archivo" << endl;
                 baseDatosImpuestos.close();
@@ -386,7 +386,7 @@ private:
             }
             else {
                 cout << "\n\t\t\tIngrese el numero de Documento de Identificacion de la persona que busca: "; cin >> busquedaDatos;
-                modBaseDatosImpuestos.open("temporalImpuestos.dat",ios::app|ios::out|ios::binary);
+                modBaseDatosImpuestos.open("temporal.dat",ios::app|ios::out|ios::binary);
                 baseDatosImpuestos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria;
                 while (!baseDatosImpuestos.eof()){
                     if (busquedaDatos!=documentoIdentificacion){
@@ -412,8 +412,8 @@ private:
                 }
                 modBaseDatosImpuestos.close();
                 baseDatosImpuestos.close();
-                remove("empleadosImpuestos.dat");
-                rename("temporalIMpuestos.dat","empleadosImpuestos.dat");
+                remove("empleados.dat");
+                rename("temporal.dat","empleadosImpuestos.dat");
                 cout << "\n\n\t\tPresione s para salir "; cin >>desicion;
                 if (desicion=="s"){
                     cout <<"\t\t\nRegresando al --MENU IMPUESTOS--";
@@ -426,7 +426,7 @@ private:
         int datos=0;
         fstream baseDatosImpuestos, modBaseDatosImpuestos;
         cout << "\n\t\t\tEntrando al menu --ELIMINAR IMPUESTOS--" << endl;
-            baseDatosImpuestos.open("empleadosImpuestos.dat",ios::in|ios::binary);
+            baseDatosImpuestos.open("empleados.dat",ios::in|ios::binary);
             if(!baseDatosImpuestos){
                 cout << "\n\t\tNo se encontro el archivo" << endl;
                 baseDatosImpuestos.close();
@@ -438,7 +438,7 @@ private:
             }
             else {
                 cout << "\n\t\tIngrese el numero de Documento de Identificacion de la persona que busca: "; cin >> busquedaDatos;
-                modBaseDatosImpuestos.open("temporalImpuestos.dat",ios::app|ios::out|ios::binary);
+                modBaseDatosImpuestos.open("temporal.dat",ios::app|ios::out|ios::binary);
                 baseDatosImpuestos>>documentoIdentificacion>>nombre>>edad>>correo>>telefono>>direccion>>estudios>>puesto>>sueldo>>nit>>Cbancaria;
                 while (!baseDatosImpuestos.eof()){
                     if (busquedaDatos!=documentoIdentificacion){
@@ -463,8 +463,8 @@ private:
                 }
                 modBaseDatosImpuestos.close();
                 baseDatosImpuestos.close();
-                remove("empleadosImpuestos.dat");
-                rename("temporalImpuestos.dat","empleadosImpuestos.dat");
+                remove("empleados.dat");
+                rename("temporal.dat","empleados.dat");
                 cout << "\n\n\t\tPresione s para salir "; cin >>desicion;
                 if (desicion=="s"){
                     cout <<"\t\t\nRegresando al --MENU IMPUESTOS--";
@@ -527,7 +527,7 @@ private:
             fstream baseDatosImpuestos;
             int total=0;
             cout<<"\n\t\t\tEntrando al --MENU MOSTRAR DATOS IMPUESTOS"<<endl;
-            baseDatosImpuestos.open("empleadosImpuestos.dat",ios::in|ios::binary);
+            baseDatosImpuestos.open("empleados.dat",ios::in|ios::binary);
             if(!baseDatosImpuestos){
                 cout<<"\n\t\t\tError\n\t\t\tNo se encontro el archivo, asegurese de que el archivo se encuentre en la misma carpeta del programa";
                 baseDatosImpuestos.close();
@@ -571,7 +571,7 @@ private:
             baseDatosImpuestos.close();
         }
     }
-    // Impuestos William Mayen ---------------------------------------------------------------------------------------------------//
+    // Impuestos William Mayen FIN---------------------------------------------------------------------------------------------------//
     //aqui deben copiar y pegar el void de registrar, modificar, eliminar, y mostrar... pero con cambios, sino estaran trabajando con mi clase de empleados
 };
 
